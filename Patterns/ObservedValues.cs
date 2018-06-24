@@ -25,6 +25,10 @@ public class ObservedFloat{
 	public void SilentSet(float value){
 		observedValue = value;
 	}
+
+    public static implicit operator float(ObservedFloat observedFloat){
+        return observedFloat.ObservedValue;
+    }
 }
 
 [System.Serializable]
