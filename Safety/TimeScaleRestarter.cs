@@ -34,6 +34,6 @@ public class TimeScaleRestarter : MonoBehaviour {
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnAfterSceneLoadRuntimeMethod(){
-		GameObject go = new GameObject("TimeScaleRestarter",typeof(TimeScaleRestarter));
+		new GameObject("TimeScaleRestarter",typeof(TimeScaleRestarter));
 	}
 }
