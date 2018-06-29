@@ -7,8 +7,8 @@ public class TemporaryState : StateMachineBehaviour {
 
     public string exitParam = "EndRotation";
     public float time = 3;
-    // public UnityEvent onEnter;
-    //public UnityEvent onExit;
+    public UnityEvent onEnter;
+    public UnityEvent onExit;
 
     private bool exit;
     private float delay;
@@ -16,7 +16,7 @@ public class TemporaryState : StateMachineBehaviour {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         delay = Time.time;
         exit = false;
-    //    onEnter.Invoke();
+        onEnter.Invoke();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -24,11 +24,7 @@ public class TemporaryState : StateMachineBehaviour {
         if (Time.time - delay > time) {
             exit = true;
             animator.SetTrigger(exitParam);
-         //   onExit.Invoke();
+            onExit.Invoke();
         }
     }
-
-    //public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        
-    //}
 }
