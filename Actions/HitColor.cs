@@ -84,4 +84,12 @@ public class HitColor : MonoBehaviour {
 			}
 		}
 	}
+
+	public void SetColor2(Color color){
+		for (int i=0; materiais!=null && i<materiais.Length; i++) {
+			for (int j=0; j<materiais[i].ids.Length; j++) {
+				render.material.SetColor(materiais[i].nomeProp , color);
+			}
+		}
+	}
 }

@@ -53,6 +53,14 @@ public class TimeManager: MonoBehaviour{
         return timeManager;
     }
 
+    public void PauseInstance(){
+       Pause();
+    }
+
+    public void UnPauseInstance(){
+       UnPause();
+    }
+
     public static void Pause(){
         GetInstance().pause = 0;
         Time.timeScale = 0;

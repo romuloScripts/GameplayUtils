@@ -55,10 +55,10 @@ public static class MovementExtensions{
         return Mathf.Abs(curAngleX) >= 360;
     }
 
-    public static void TurnRotation(this Transform transform, Vector3 move, float rotationSpeed){
+    public static void TurnRotation(this Transform transform, Vector3 move, float rotationSpeed, Vector3 up){
         if(move.magnitude <=0f || ((transform.position+move) - transform.position) == Vector3.zero) return;
-		Quaternion targetRot = Quaternion.LookRotation((transform.position+move) - transform.position);
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, move.magnitude * rotationSpeed*Time.deltaTime);
+		Quaternion targetRot = Quaternion.LookRotation((transform.position+move) - transform.position,up);
+		transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, move.magnitude * rotationSpeed * Time.deltaTime);
     }
 
     public static void Move(this Rigidbody rigd, Vector3 move, float velMoviment = 1, Animator animator = null, string param = "Vel"){
@@ -73,5 +73,20 @@ public static class MovementExtensions{
             move.Normalize();
         animator?.SetFloat(param, move.magnitude);
         rigd.velocity = rigd.transform.forward * move.magnitude *velMoviment;
+    }
+
+    public static void Move2D(this Rigidbody2D rigd, Vector2 move, float velMoviment = 1, Animator animator = null, string param = "Speed"){
+        if (move.magnitude > 1f)
+            move.Normalize();
+        animator?.SetFloat(param, move.magnitude);
+        rigd.velocity = move*velMoviment;
+    }
+
+    public static void Move2DAddForce(this Rigidbody2D rigd, Vector2 move,  float velMoviment = 1, 
+        ForceMode2D forceMode= ForceMode2D.Force, Animator animator = null, string param = "Speed"){
+        if (move.magnitude > 1f)
+            move.Normalize();
+        animator?.SetFloat(param, move.magnitude);
+        rigd.AddForce(move*velMoviment,forceMode);
     }
 }
