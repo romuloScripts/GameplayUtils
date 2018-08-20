@@ -61,6 +61,14 @@ public static class MovementExtensions{
 		transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, move.magnitude * rotationSpeed * Time.deltaTime);
     }
 
+    public static void TurnRotation2D(this Transform transform,Vector2 direction, float speed=1){
+        if (direction.magnitude != 0){
+            float angle = Mathf.Atan2(direction.x, -1 * direction.y) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, q, speed * Time.deltaTime);
+        }
+    }
+
     public static void Move(this Rigidbody rigd, Vector3 move, float velMoviment = 1, Animator animator = null, string param = "Vel"){
         if (move.magnitude > 1f)
             move.Normalize();
@@ -89,4 +97,5 @@ public static class MovementExtensions{
         animator?.SetFloat(param, move.magnitude);
         rigd.AddForce(move*velMoviment,forceMode);
     }
+
 }
