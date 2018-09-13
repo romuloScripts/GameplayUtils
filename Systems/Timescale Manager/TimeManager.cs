@@ -13,7 +13,6 @@ public class SlowMotionData{
     }
 }
 
-
 public class TimeManager: MonoBehaviour{
 
 	public float pause=1;
@@ -33,11 +32,19 @@ public class TimeManager: MonoBehaviour{
 		}
 	}
 
+    void Awake(){
+        if(timeManager){
+            Destroy(timeManager);
+        }
+        timeManager = this;
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         UnPause();
         scaleFactor=1;
         TimeScale = 1;
     }
+
 
     static void CreateInstance() {
         GameObject g = new GameObject("TimeManager", typeof(TimeManager));
