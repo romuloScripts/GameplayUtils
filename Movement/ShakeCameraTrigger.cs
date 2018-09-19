@@ -8,10 +8,15 @@ public class ShakeCameraTrigger : MonoBehaviour {
 	public float amount, duration;
 	public bool onEnable;
 	
-	public void Shake(){
-		Camera.main.GetComponent<CameraShake>().ShakeCamera(amount,duration);
-		//Camera.main.DOShakePosition(duration,amount);
+	private Camera cam;
 
+	private void Awake() {
+		cam = Camera.main;
+	}
+
+	public void Shake(){
+		cam.GetComponent<CameraShake>().ShakeCamera(amount,duration);
+		//Camera.main.DOShakePosition(duration,amount);
 	}
 
 	private void OnEnable() {
