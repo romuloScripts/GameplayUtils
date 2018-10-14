@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public static class BehaviourExtensions
+{
+    public static void SetEnable(this Behaviour component, bool enable){
+   		component.enabled = enable;
+	}
+}
+
 public static class InvokeExtension{
 
 	public static Coroutine Invoke(this MonoBehaviour monoBehaviour, Action action, float time){
@@ -98,4 +105,7 @@ public static class MovementExtensions{
         rigd.AddForce(move*velMoviment,forceMode);
     }
 
+    public static void SetBodyType(this Rigidbody2D rigd, RigidbodyType2D rigidbodyType2D){
+        rigd.bodyType = rigidbodyType2D;
+    }
 }
