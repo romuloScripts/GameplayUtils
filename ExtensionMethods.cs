@@ -8,6 +8,14 @@ public static class BehaviourExtensions
     public static void SetEnable(this Behaviour component, bool enable){
    		component.enabled = enable;
 	}
+
+    public static void SetActiveGO(this Behaviour component,bool enable){
+   		component.gameObject.SetActive(enable);
+	}
+
+    public static void SetEnableCollider2D(this Component component, bool enable){
+        component.GetComponent<Collider2D>()?.SetEnable(enable);
+    }
 }
 
 public static class InvokeExtension{
