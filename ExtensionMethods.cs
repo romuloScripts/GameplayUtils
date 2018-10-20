@@ -116,4 +116,9 @@ public static class MovementExtensions{
     public static void SetBodyType(this Rigidbody2D rigd, RigidbodyType2D rigidbodyType2D){
         rigd.bodyType = rigidbodyType2D;
     }
+
+    public static void ClampVelocity(this Rigidbody2D rigid2D, float maxVelocity)
+    {
+        rigid2D.velocity = Vector2.ClampMagnitude(rigid2D.velocity, maxVelocity);
+    }
 }

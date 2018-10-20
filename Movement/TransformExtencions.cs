@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public static class TransformExtencions {
+public static class TransformExtensions {
 
 	public static float Distance (this Transform trans, Transform b) {
 		return Vector3.Distance(trans.position, b.position);
@@ -25,6 +25,18 @@ public static class TransformExtencions {
 		_zForward.z = 0f;
 		return Quaternion.LookRotation(_zForward);
 	}
+
+	public static void FlipScale2D(this Transform transform)
+    {
+        transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
+    }
+
+	public static void FlipScale2D(this Transform transform, float dir = -1)
+    {
+		Vector3 scale= transform.localScale;
+		scale.x = Mathf.Abs(scale.x);
+        transform.localScale = Vector3.Scale(scale, new Vector3(dir, 1, 1));
+    }
 
 	public static float Distance (this Vector3 v3, Vector3 b) {
 		return Vector3.Distance(v3, b);
