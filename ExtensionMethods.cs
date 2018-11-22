@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
+
+public static class RandomExtensions
+{
+    public static T GetRandomElement<T>(this T[] array){
+   		return array[Random.Range(0,array.Length)];
+	}
+
+    public static T GetRandomElement<T>(this List<T> list){
+   		return list[Random.Range(0,list.Count)];
+	}
+}
 
 public static class BehaviourExtensions
 {
