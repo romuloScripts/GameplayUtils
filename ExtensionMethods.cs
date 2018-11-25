@@ -28,6 +28,12 @@ public static class BehaviourExtensions
     public static void SetEnableCollider2D(this Component component, bool enable){
         component.GetComponent<Collider2D>()?.SetEnable(enable);
     }
+
+    public static void SetColliderTrigger(this Component component, bool trigger){
+        Collider2D collider = component.GetComponent<Collider2D>();
+        if(collider)
+            collider.isTrigger = trigger;
+    }
 }
 
 public static class InvokeExtension{
