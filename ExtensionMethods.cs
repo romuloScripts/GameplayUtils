@@ -38,6 +38,9 @@ public static class BehaviourExtensions
 
 public static class InvokeExtension{
 
+    public delegate T Getter<out T>();
+    public delegate void Setter<in T>(T pNewValue);
+
 	public static Coroutine Invoke(this MonoBehaviour monoBehaviour, Action action, float time){
    		return monoBehaviour.StartCoroutine(InvokeImpl(action, time));
 	}
@@ -45,6 +48,15 @@ public static class InvokeExtension{
 	private static IEnumerator InvokeImpl(Action action, float time){
    		yield return new WaitForSeconds(time);
 		action();
+	}
+
+    private static IEnumerator To(Getter<float> getter,Setter<float> setter, float endValue, float duration){
+        float f = getter.Invoke();
+        while(f != endValue){
+           yield return null; 
+           f = Mathf.MoveTowards(f,endValue,Time.deltaTime/duration);
+           setter.Invoke(f);
+        }
 	}
 }
 
