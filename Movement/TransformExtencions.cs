@@ -4,6 +4,14 @@ using System.Collections;
 
 public static class TransformExtensions {
 
+	public static void DestroyChilds(this Transform transform)
+	{
+		for (int i = transform.childCount-1; i >=0; i--)
+		{
+			Object.Destroy((transform.GetChild(i).gameObject));
+		}
+	}
+
 	public static float Distance (this Transform trans, Transform b) {
 		return Vector3.Distance(trans.position, b.position);
 	}
