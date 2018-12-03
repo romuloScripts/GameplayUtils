@@ -27,5 +27,4 @@ public class ScaleValue : MonoBehaviour {
         if (timeDisable > 0f && t >= timeDisable)
             enabled = false;
     }
-
 }

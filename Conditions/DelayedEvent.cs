@@ -8,11 +8,15 @@ public class DelayedEvent : MonoBehaviour {
 	public UnityEvent delayedEvent;
 	
 	public void Invoke(){
-		Invoke("OnDelay",delay);
+		Invoke(nameof(OnDelay),delay);
 	}
 	
 	public void Invoke(float delay){
-		Invoke("OnDelay",delay);
+		Invoke(nameof(OnDelay),delay);
+	}
+	
+	public void Cancel(){
+		CancelInvoke(nameof(OnDelay));
 	}
 	
 	public void OnDelay(){
