@@ -41,14 +41,21 @@ public static class InvokeExtension{
     public delegate T Getter<out T>();
     public delegate void Setter<in T>(T pNewValue);
 
-	public static Coroutine Invoke(this MonoBehaviour monoBehaviour, Action action, float time){
+	public static Coroutine Invoke(this MonoBehaviour monoBehaviour, Action action, float time, bool unscaledTime=false){
+	    if(unscaledTime)
+	        return monoBehaviour.StartCoroutine(InvokeImplUnscaled(action, time));
    		return monoBehaviour.StartCoroutine(InvokeImpl(action, time));
 	}
 
-	private static IEnumerator InvokeImpl(Action action, float time){
-   		yield return new WaitForSeconds(time);
+	private static IEnumerator InvokeImplUnscaled(Action action, float time){
+   		yield return new WaitForSecondsRealtime(time);
 		action();
 	}
+
+    private static IEnumerator InvokeImpl(Action action, float time){
+        yield return new WaitForSeconds(time);
+        action();
+    }
 
     private static IEnumerator To(Getter<float> getter,Setter<float> setter, float endValue, float duration){
         float f = getter.Invoke();

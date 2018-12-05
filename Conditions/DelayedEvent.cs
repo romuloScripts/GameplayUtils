@@ -6,6 +6,8 @@ public class DelayedEvent : MonoBehaviour {
 
 	public float delay;
 	public UnityEvent delayedEvent;
+
+	private Coroutine _c;
 	
 	public void Invoke(){
 		Invoke(nameof(OnDelay),delay);
@@ -21,5 +23,20 @@ public class DelayedEvent : MonoBehaviour {
 	
 	public void OnDelay(){
 		delayedEvent.Invoke();
+	}
+	
+	public void InvokeUnscaledTime()
+	{
+		_c = this.Invoke(OnDelay, delay, true);
+	}
+	
+	public void InvokeUnscaledTime(float delay){
+		_c = this.Invoke(OnDelay, delay, true);
+	}
+	
+	public void CancelUnscaledTime()
+	{
+		if(_c != null)
+			StopCoroutine(_c);
 	}
 }
