@@ -37,16 +37,23 @@ public class TimeManager: MonoBehaviour{
             Destroy(timeManager);
         }
         timeManager = this;
+	    ResetTimeScale();
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode){
-        UnPause();
-        scaleFactor=1;
-        TimeScale = 1;
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+	    ResetTimeScale();
     }
 
+	private void ResetTimeScale()
+	{
+		UnPause();
+		scaleFactor = 1;
+		TimeScale = 1;
+	}
 
-    static void CreateInstance() {
+
+	static void CreateInstance() {
         GameObject g = new GameObject("TimeManager", typeof(TimeManager));
         timeManager = g.GetComponent<TimeManager>();
         SceneManager.sceneLoaded += timeManager.OnSceneLoaded;
