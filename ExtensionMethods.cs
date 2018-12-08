@@ -46,6 +46,10 @@ public static class InvokeExtension{
 	        return monoBehaviour.StartCoroutine(InvokeImplUnscaled(action, time));
    		return monoBehaviour.StartCoroutine(InvokeImpl(action, time));
 	}
+    
+    public static Coroutine InvokeWhen(this MonoBehaviour monoBehaviour, Action action, Func<bool> predicate){
+        return monoBehaviour.StartCoroutine(InvokeImplWhen(action, predicate));
+    }
 
 	private static IEnumerator InvokeImplUnscaled(Action action, float time){
    		yield return new WaitForSecondsRealtime(time);
@@ -54,6 +58,11 @@ public static class InvokeExtension{
 
     private static IEnumerator InvokeImpl(Action action, float time){
         yield return new WaitForSeconds(time);
+        action();
+    }
+    
+    private static IEnumerator InvokeImplWhen(Action action, Func<bool> predicate){
+        yield return new WaitUntil(predicate);
         action();
     }
 
