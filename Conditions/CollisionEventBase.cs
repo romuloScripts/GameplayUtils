@@ -16,6 +16,15 @@ public class CollisionEventBase : MonoBehaviour {
 	public void ForceEvent(Collider col){
 		StartCoroutine(Collision(col));
 	}
+	
+	public void ForceEvent(){
+		if(triggered && destroy) return; 
+		triggered = true;
+		onCollisionEnter.Invoke(); 
+		if(destroy){ 
+			Destroy(this); 
+		}
+	}
 
 	public IEnumerator Collision(Collider col){
 		if((triggered && destroy) || (useTag && !col.CompareTag(collisionTag))) yield break;
